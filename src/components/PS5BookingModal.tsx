@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Gamepad2, Calendar, Clock, Users, CheckCircle2, Tv, CreditCard, Banknote, Phone, ShieldAlert, Loader2 } from 'lucide-react';
+import { X, Gamepad2, Calendar, Clock, Users, CheckCircle2, Tv, Phone, ShieldAlert, Loader2 } from 'lucide-react';
 import { GAMES_LIBRARY, STORE_INFO, REAL_IMAGES } from '../data/storeData';
 
 interface PS5BookingModalProps {
@@ -23,10 +23,10 @@ export const PS5BookingModal: React.FC<PS5BookingModalProps> = ({ isOpen, onClos
   const [phone, setPhone] = useState<string>('');
   const [note, setNote] = useState<string>('');
 
-  const pricingMap = {
-    '1h': { label: '1 hodina', price: 250, badge: 'Rychlý chill' },
-    '2h': { label: '2 hodiny', price: 450, badge: 'Populární (Welcome Drink v ceně)' },
-    '3h': { label: '3 hodiny', price: 650, badge: 'VIP Squad Night' },
+  const durationOptions = {
+    '1h': { label: '1 hodina', badge: 'Rychlý chill slot' },
+    '2h': { label: '2 hodiny', badge: 'Standardní session' },
+    '3h': { label: '3 hodiny', badge: 'Prodloužený herní večer' },
   };
 
   const handleBooking = async (e: React.FormEvent) => {
@@ -43,15 +43,14 @@ export const PS5BookingModal: React.FC<PS5BookingModalProps> = ({ isOpen, onClos
         },
         body: JSON.stringify({
           formType: 'Rezervace PS5 Room',
-          duration: `${pricingMap[duration].label} (${pricingMap[duration].price} Kč)`,
-          playersCount: `${players} hráči`,
+          duration: durationOptions[duration].label,
+          playersCount: `${players} ${players === 1 ? 'hráč' : players < 5 ? 'hráči' : 'hráčů'}`,
           startingGame: selectedGame,
           date,
           time,
           customerName: name,
           customerPhone: phone,
           customerNote: note || 'Bez poznámky',
-          paymentMethod: 'Platba na místě (hotově nebo kartou)',
           submittedAt: new Date().toISOString()
         })
       });
@@ -93,7 +92,7 @@ export const PS5BookingModal: React.FC<PS5BookingModalProps> = ({ isOpen, onClos
                   Privátní PS5 Chill Zone
                 </span>
                 <h3 className="font-display text-xl font-bold text-white tracking-tight">
-                  Rezervovat PlayStation 5 Room
+                  Rezervovat herní slot PlayStation 5
                 </h3>
               </div>
             </div>
@@ -110,38 +109,34 @@ export const PS5BookingModal: React.FC<PS5BookingModalProps> = ({ isOpen, onClos
           {step === 'form' ? (
             <form onSubmit={handleBooking} className="p-5 sm:p-6 space-y-5 max-h-[78vh] overflow-y-auto">
               
-              {/* Real Room Preview & PROMINENT TEXT: NO ONLINE PAYMENTS REQUIRED BANNER */}
-              <div className="p-3.5 rounded-xl bg-zinc-900/90 border border-zinc-800 flex flex-col sm:flex-row items-start sm:items-center gap-4">
-                <div className="relative w-full sm:w-28 h-20 rounded-lg overflow-hidden border border-zinc-800 flex-shrink-0 bg-zinc-950">
+              {/* Room Showcase Preview Card - No payment or price mentions */}
+              <div className="p-3.5 rounded-xl bg-zinc-900/80 border border-zinc-800 flex items-center gap-4">
+                <div className="relative w-24 h-16 sm:w-28 sm:h-18 rounded-lg overflow-hidden border border-zinc-800 flex-shrink-0 bg-zinc-950">
                   <img
                     src={REAL_IMAGES.ps5Room}
                     alt="Reálný PS5 Room Frogo Hradec Králové"
                     className="w-full h-full object-cover object-center"
                   />
-                  <span className="absolute bottom-1 left-1 px-1.5 py-0.5 rounded text-[8px] font-mono bg-zinc-950/90 text-zinc-300 border border-zinc-800">
-                    Reálný setup
-                  </span>
                 </div>
 
                 <div className="flex-1">
-                  <div className="text-xs font-mono font-bold text-red-400 uppercase tracking-wide flex items-center gap-1.5">
-                    <Banknote className="w-3.5 h-3.5 text-zinc-300" strokeWidth={1.5} />
-                    <span>Platba probíhá až na místě (hotově nebo kartou).</span>
+                  <div className="text-xs font-display font-bold text-white uppercase tracking-tight">
+                    Privátní Gaming Lounge • Hradec Králové
                   </div>
-                  <p className="text-[11px] text-zinc-400 mt-1 leading-relaxed">
-                    Žádné platby online předem. Rezervace je nezávazná, platíte až při příchodu do herny na adrese Švehlova 633/10.
+                  <p className="text-[11px] text-zinc-400 mt-0.5 leading-relaxed">
+                    Švehlova 633/10 (Masarykovo náměstí). Zvolte požadovanou délku slotu, termín a vybranou hru.
                   </p>
                 </div>
               </div>
 
-              {/* Duration selector */}
+              {/* 1. Duration selector - NO PRICES, strictly duration and description */}
               <div>
                 <label className="text-xs font-mono uppercase tracking-wider text-zinc-400 font-medium block mb-2">
                   1. Vyberte délku herního slotu
                 </label>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
                   {(['1h', '2h', '3h'] as const).map((key) => {
-                    const opt = pricingMap[key];
+                    const opt = durationOptions[key];
                     const active = duration === key;
                     return (
                       <button
@@ -154,10 +149,7 @@ export const PS5BookingModal: React.FC<PS5BookingModalProps> = ({ isOpen, onClos
                             : 'bg-zinc-900/50 border-zinc-800 text-zinc-400 hover:border-zinc-700 hover:text-zinc-200'
                         }`}
                       >
-                        <div className="flex items-center justify-between">
-                          <span className="font-display font-bold text-sm text-white">{opt.label}</span>
-                          <span className="font-mono text-xs font-bold text-red-400">{opt.price} Kč</span>
-                        </div>
+                        <span className="font-display font-bold text-sm text-white block">{opt.label}</span>
                         <p className="text-[10px] text-zinc-400 mt-1 line-clamp-1">{opt.badge}</p>
                       </button>
                     );
@@ -165,7 +157,7 @@ export const PS5BookingModal: React.FC<PS5BookingModalProps> = ({ isOpen, onClos
                 </div>
               </div>
 
-              {/* Date, Time & Players grid */}
+              {/* 2. Date, Time & Players grid */}
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5">
                 <div>
                   <label className="text-xs font-mono uppercase tracking-wider text-zinc-400 font-medium block mb-1.5 flex items-center gap-1.5">
@@ -226,7 +218,7 @@ export const PS5BookingModal: React.FC<PS5BookingModalProps> = ({ isOpen, onClos
                 </div>
               </div>
 
-              {/* Game preference */}
+              {/* 3. Game preference */}
               <div>
                 <label className="text-xs font-mono uppercase tracking-wider text-zinc-400 font-medium block mb-2 flex items-center gap-1.5">
                   <Tv className="w-3.5 h-3.5 text-zinc-400" strokeWidth={1.5} />
@@ -250,7 +242,7 @@ export const PS5BookingModal: React.FC<PS5BookingModalProps> = ({ isOpen, onClos
                 </div>
               </div>
 
-              {/* Contact info inputs */}
+              {/* 4. Contact info inputs */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 pt-2 border-t border-zinc-800/80">
                 <div>
                   <label className="text-[11px] font-mono uppercase tracking-wider text-zinc-400 font-medium block mb-1">
@@ -294,35 +286,32 @@ export const PS5BookingModal: React.FC<PS5BookingModalProps> = ({ isOpen, onClos
                 />
               </div>
 
-              {/* Total Calculation & CTA */}
+              {/* Clean Action Section - NO PRICE CALCULATION SECTION */}
               <div className="p-4 rounded-xl bg-zinc-900 border border-zinc-800 flex flex-col sm:flex-row items-center justify-between gap-4">
                 <div>
-                  <span className="text-[11px] font-mono uppercase tracking-wider text-zinc-400 block">Celková cena slotu:</span>
-                  <div className="flex items-baseline gap-2">
-                    <span className="font-display text-2xl font-bold text-white">
-                      {pricingMap[duration].price} Kč
-                    </span>
-                    <span className="text-xs text-red-400 font-mono">({pricingMap[duration].label}, {players} hráči)</span>
+                  <span className="text-[11px] font-mono uppercase tracking-wider text-zinc-400 block">Souhrn požadavku:</span>
+                  <div className="font-display text-base font-bold text-white mt-0.5">
+                    {durationOptions[duration].label} • {players} {players === 1 ? 'hráč' : players < 5 ? 'hráči' : 'hráčů'}
                   </div>
                   <span className="text-[10px] font-mono text-zinc-400 block mt-0.5">
-                    Platba probíhá až na místě (hotově nebo kartou).
+                    Nezávazná poptávka termínu • Potvrzení formou SMS
                   </span>
                 </div>
 
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full sm:w-auto px-6 py-3 rounded-xl bg-red-600 hover:bg-red-700 text-white font-display font-bold text-xs tracking-wider uppercase transition-colors flex items-center justify-center gap-2 disabled:opacity-60"
+                  className="w-full sm:w-auto px-6 py-3 rounded-xl bg-red-600 hover:bg-red-700 text-white font-display font-bold text-xs tracking-wider uppercase transition-colors flex items-center justify-center gap-2 disabled:opacity-60 flex-shrink-0"
                 >
                   {isSubmitting ? (
                     <>
                       <Loader2 className="w-4 h-4 animate-spin" strokeWidth={1.5} />
-                      <span>Odesílám rezervaci...</span>
+                      <span>Odesílám žádost...</span>
                     </>
                   ) : (
                     <>
                       <Gamepad2 className="w-4 h-4" strokeWidth={1.5} />
-                      <span>Potvrdit rezervaci</span>
+                      <span>Odeslat žádost o rezervaci</span>
                     </>
                   )}
                 </button>
@@ -334,33 +323,33 @@ export const PS5BookingModal: React.FC<PS5BookingModalProps> = ({ isOpen, onClos
               </div>
             </form>
           ) : (
-            /* Beautiful Streetwear Boutique Success Screen */
+            /* Beautiful Streetwear Boutique Success Screen - NO MONEY / PRICE / PAYMENT MENTIONS */
             <div className="p-8 sm:p-10 text-center space-y-4">
               <div className="w-14 h-14 rounded-full bg-zinc-900 border border-zinc-700 flex items-center justify-center mx-auto text-emerald-400">
                 <CheckCircle2 className="w-8 h-8" strokeWidth={1.5} />
               </div>
 
               <h4 className="font-display text-2xl font-bold text-white tracking-tight">
-                Rezervace PS5 Roomu byla odeslána!
+                Žádost o rezervaci byla odeslána!
               </h4>
 
               <p className="text-xs sm:text-sm text-zinc-400 max-w-md mx-auto leading-relaxed">
-                Děkujeme, <strong>{name}</strong>! Váš herní slot na <strong className="text-zinc-200">{pricingMap[duration].label}</strong> ({date} v {time}, {players} hráči, {selectedGame}) byl zaznamenán. Brzy vám pošleme potvrzení na uvedený telefon.
+                Děkujeme, <strong>{name}</strong>! Váš požadavek na termín <strong className="text-zinc-200">{durationOptions[duration].label}</strong> ({date} v {time}, {players} {players === 1 ? 'hráč' : players < 5 ? 'hráči' : 'hráčů'}, {selectedGame}) byl zaznamenán. Brzy vám pošleme potvrzení na uvedený telefon.
               </p>
 
-              {/* Prominent Payment Note in Success Screen */}
-              <div className="p-3.5 rounded-xl bg-zinc-900 border border-red-500/30 max-w-sm mx-auto text-xs text-left space-y-1.5">
-                <div className="flex items-center gap-2 font-mono font-bold text-red-400 text-xs">
-                  <CreditCard className="w-4 h-4 text-red-500" strokeWidth={1.5} />
-                  <span>Platba probíhá až na místě (hotově nebo kartou).</span>
-                </div>
-                <div className="flex justify-between text-zinc-400 text-[11px] pt-1 border-t border-zinc-800">
+              {/* Booking Summary Box - strictly slot & location info */}
+              <div className="p-3.5 rounded-xl bg-zinc-900 border border-zinc-800 max-w-sm mx-auto text-xs text-left space-y-1.5">
+                <div className="flex justify-between text-zinc-400 text-[11px]">
                   <span>Místo:</span>
-                  <strong className="text-zinc-200">Švehlova 633/10, HK</strong>
+                  <strong className="text-zinc-200">Švehlova 633/10 (Masarykovo náměstí), HK</strong>
                 </div>
                 <div className="flex justify-between text-zinc-400 text-[11px]">
-                  <span>Částka k úhradě na místě:</span>
-                  <strong className="text-white font-bold">{pricingMap[duration].price} Kč</strong>
+                  <span>Délka slotu:</span>
+                  <strong className="text-white font-bold">{durationOptions[duration].label}</strong>
+                </div>
+                <div className="flex justify-between text-zinc-400 text-[11px]">
+                  <span>Preferovaná hra:</span>
+                  <strong className="text-white font-medium">{selectedGame}</strong>
                 </div>
               </div>
 
@@ -373,7 +362,7 @@ export const PS5BookingModal: React.FC<PS5BookingModalProps> = ({ isOpen, onClos
                 </button>
                 <a
                   href={`tel:${STORE_INFO.contacts.phone}`}
-                  className="px-4 py-2.5 rounded-xl bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 text-zinc-300 text-xs flex items-center gap-2 transition-colors font-mono"
+                  className="px-4 py-2.5 rounded-xl bg-zinc-900 hover:bg-zinc-850 border border-zinc-800 text-zinc-300 text-xs flex items-center gap-2 transition-colors font-mono"
                 >
                   <Phone className="w-3.5 h-3.5 text-zinc-400" strokeWidth={1.5} />
                   <span>Zavolat na prodejnu ({STORE_INFO.contacts.phoneFormatted})</span>

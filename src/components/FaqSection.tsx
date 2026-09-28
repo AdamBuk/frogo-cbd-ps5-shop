@@ -24,7 +24,7 @@ export const FaqSection: React.FC = () => {
             Vše, co potřebuješ <span className="text-zinc-400 font-light">vědět</span>
           </h2>
           <p className="mt-2 text-xs sm:text-sm text-zinc-400 font-normal">
-            Odpovědi na nejčastější dotazy ohledně PS5 chill roomu, CBD produktů a platby na místě.
+            Odpovědi na nejčastější dotazy ohledně PS5 chill roomu, CBD produktů a online rezervací.
           </p>
         </div>
 

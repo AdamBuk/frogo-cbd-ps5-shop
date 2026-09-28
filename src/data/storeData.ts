@@ -222,7 +222,7 @@ export const CATEGORIES: Category[] = [
         tagline: 'Rychlá herní pauza během dne nebo po práci',
         description: 'Privátní chill zóna na 60 minut pro 1–4 osoby. Plný přístup ke všem nainstalovaným hrám a soundbaru. Možnost dokoupit chlazené nápoje a CBD občerstvení.',
         specs: '60 minut | až 4 hráči | Privátní místnost',
-        price: '250 Kč / hod',
+        price: 'Rezervace slotu',
         image: REAL_IMAGES.ps5Room,
         badges: ['Reálný setup', 'Pro 1-4 hráče'],
         effects: ['Gaming', 'Rychlý chill']
@@ -233,10 +233,10 @@ export const CATEGORIES: Category[] = [
         category: 'PS5 Chill Zone',
         tagline: 'Nejpopulárnější volba na turnaj s kámoši',
         description: 'Dvě hodiny intenzivního gamingu a relaxu bez rušení. Ideální na turnaj ve fotbálku FC 25, bojovkách Tekken 8 nebo nočních jízdách v Gran Turismo 7.',
-        specs: '120 minut | až 4 hráči | Welcome CBD nápoj v ceně',
-        price: '450 Kč / 2 hod',
+        specs: '120 minut | až 4 hráči | Privátní chill room',
+        price: 'Rezervace slotu',
         image: REAL_IMAGES.ps5RoomAmbient,
-        badges: ['Ambient Lounge', 'Nápoj v ceně'],
+        badges: ['Ambient Lounge', 'Pro 1-4 hráče'],
         effects: ['Turnaj', 'Maximální chill']
       },
       {
@@ -244,9 +244,9 @@ export const CATEGORIES: Category[] = [
         name: 'VIP Night Gaming Pass (3 hodiny)',
         category: 'PS5 Chill Zone',
         tagline: 'Celý večer pro tebe a tvůj squad',
-        description: 'Exkluzivní tříhodinový blok s prioritní rezervací. Maximální soukromí, ambientní červené podsvícení místnosti a 2x prémiové nápoje pro každého.',
+        description: 'Exkluzivní tříhodinový blok s prioritní rezervací. Maximální soukromí, ambientní červené podsvícení místnosti a dokonalé zázemí.',
         specs: '180 minut | Neomezené přepínání her | VIP komfort',
-        price: '650 Kč / 3 hod',
+        price: 'Rezervace slotu',
         image: REAL_IMAGES.ps5Room,
         badges: ['VIP balíček', 'Večerní slot'],
         effects: ['Squad night', 'Legendární zážitek']
@@ -335,8 +335,8 @@ export const FAQS = [
     answer: 'Rezervaci zvládneš online přes náš rezervační formulář, na telefonu nebo rovnou osobně na prodejně ve Švehlově ulici. Vybereš si datum, čas a délku (1h, 2h nebo 3h slot). V místnosti je naprosté soukromí pro tebe a až 3 další kámoše.'
   },
   {
-    question: 'Jak probíhá platba za rezervaci PS5 Roomu?',
-    answer: 'Žádné platby online předem nepožadujeme. Platba probíhá až na místě (hotově nebo kartou) při příchodu do chill roomu.'
+    question: 'Je online rezervace PS5 Roomu závazná?',
+    answer: 'Rezervace přes web je nezávazná poptávka volného slotu. Po odeslání požadavku vás zkontaktujeme nebo vám zašleme potvrzení formou SMS.'
   },
   {
     question: 'Je vstup a nákup přísně 18+?',

@@ -260,7 +260,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBooking }) => {
                       </p>
 
                       <div className="mt-2.5 pt-2.5 border-t border-zinc-800/80 flex items-center justify-between">
-                        <span className="text-[11px] font-mono text-zinc-400">Platba až na místě (od 250 Kč)</span>
+                        <span className="text-[11px] font-mono text-zinc-400">Nezávazná online rezervace</span>
                         <button
                           onClick={onOpenBooking}
                           className="text-xs font-display font-semibold uppercase text-red-400 hover:text-red-300 transition-colors"

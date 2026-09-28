@@ -151,8 +151,8 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onOpenBooking }) => 
                 PS5
               </div>
               <div>
-                <div className="text-xs font-display font-bold text-white uppercase">Privátní sloty od 250 Kč</div>
-                <div className="text-[11px] font-mono text-zinc-400">Platba probíhá až na místě</div>
+                <div className="text-xs font-display font-bold text-white uppercase">Privátní herní sloty</div>
+                <div className="text-[11px] font-mono text-zinc-400">Nezávazná online rezervace</div>
               </div>
             </div>
           </motion.div>
@@ -225,7 +225,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onOpenBooking }) => 
               </button>
 
               <span className="text-xs font-mono text-zinc-400 text-center sm:text-left">
-                Platba až na místě • <strong>{STORE_INFO.address.street}</strong>
+                Nezávazná rezervace • <strong>{STORE_INFO.address.street}</strong>
               </span>
             </div>
           </motion.div>

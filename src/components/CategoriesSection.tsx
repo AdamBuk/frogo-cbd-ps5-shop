@@ -314,7 +314,9 @@ export const CategoriesSection: React.FC<CategoriesSectionProps> = ({ onOpenBook
 
                       <div className="mt-4 pt-3 border-t border-zinc-800 flex items-center justify-between">
                         <div>
-                          <span className="text-[10px] uppercase font-mono text-zinc-500 block">Cena</span>
+                          <span className="text-[10px] uppercase font-mono text-zinc-500 block">
+                            {selectedCategoryModal.id === 'ps5-zone' ? 'Dostupnost' : 'Cena'}
+                          </span>
                           <span className="font-display font-bold text-white text-sm">{item.price}</span>
                         </div>
 
