@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <rect width="64" height="64" rx="14" fill="#09090b" stroke="#dc2626" stroke-width="2.5"/>
+  <!-- Glowing red circle -->
+  <circle cx="32" cy="32" r="22" fill="#dc2626" opacity="0.15"/>
+  
+  <!-- Stylized gamepad + leaf silhouette -->
+  <path d="M20 25C15 25 14 36 17 43C19 47 24 47 27 43L30 38H34L37 43C40 47 45 47 47 43C50 36 49 25 44 25C38 25 36 29 32 29C28 29 26 25 20 25Z" fill="#18181b" stroke="#ef4444" stroke-width="2.5" stroke-linejoin="round"/>
+  
+  <!-- D-pad / Buttons in Red -->
+  <circle cx="23" cy="33" r="2.5" fill="#ef4444"/>
+  <circle cx="41" cy="31" r="2" fill="#ef4444"/>
+  <circle cx="45" cy="35" r="2" fill="#ff1a1a"/>
+  
+  <!-- Center neon frog eyes / dot -->
+  <circle cx="29" cy="21" r="2" fill="#ef4444"/>
+  <circle cx="35" cy="21" r="2" fill="#ef4444"/>
+</svg>
