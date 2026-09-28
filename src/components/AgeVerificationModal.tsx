@@ -10,7 +10,7 @@ export const AgeVerificationModal: React.FC = () => {
   useEffect(() => {
     const verified = localStorage.getItem('frogo_age_verified');
     if (!verified) {
-      const timer = setTimeout(() => setIsOpen(true), 400);
+      const timer = setTimeout(() => setIsOpen(true), 300);
       return () => clearTimeout(timer);
     }
   }, []);
@@ -28,61 +28,58 @@ export const AgeVerificationModal: React.FC = () => {
 
   return (
     <AnimatePresence>
-      <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/90 backdrop-blur-xl">
+      <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-sm">
         <motion.div
-          initial={{ opacity: 0, scale: 0.9, y: 20 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
-          exit={{ opacity: 0, scale: 0.9, y: 20 }}
-          transition={{ duration: 0.25 }}
-          className="relative w-full max-w-md bg-zinc-950 rounded-3xl p-6 sm:p-8 shadow-[0_0_60px_rgba(255,20,36,0.35)] border border-red-600/40 text-center text-zinc-100"
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 0.95 }}
+          transition={{ duration: 0.2 }}
+          className="relative w-full max-w-md bg-zinc-950 rounded-2xl p-6 sm:p-7 border border-zinc-800 text-center text-zinc-100 shadow-2xl"
         >
-          {/* Top glowing bar */}
-          <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-red-600 via-rose-500 to-red-600 shadow-[0_0_15px_#ff1424]" />
-
           {/* Icon */}
-          <div className="w-16 h-16 rounded-2xl bg-red-600/10 border border-red-600/40 text-red-500 flex items-center justify-center mx-auto mb-4 shadow-[0_0_20px_rgba(255,20,36,0.3)]">
-            <ShieldAlert className="w-9 h-9 text-red-500 animate-pulse" />
+          <div className="w-12 h-12 rounded-xl bg-zinc-900 border border-zinc-800 text-red-500 flex items-center justify-center mx-auto mb-3.5">
+            <ShieldAlert className="w-6 h-6 text-red-500" strokeWidth={1.5} />
           </div>
 
-          <span className="text-xs font-mono uppercase tracking-widest text-red-400 font-bold block mb-1">
+          <span className="text-xs font-mono uppercase tracking-widest text-red-400 font-medium block mb-1">
             Zákonné ověření věku • 18+
           </span>
-          <h3 className="font-display text-2xl sm:text-3xl font-black text-white uppercase tracking-tight">
+          <h3 className="font-display text-2xl font-bold text-white uppercase tracking-tight">
             Vstup pouze pro dospělé
           </h3>
 
-          <p className="text-xs sm:text-sm text-zinc-400 mt-3 leading-relaxed">
+          <p className="text-xs text-zinc-400 mt-2.5 leading-relaxed">
             V souladu se zákonem č. 167/1998 Sb. o návykových látkách je nákup CBD produktů a vstup do privátní PS5 chill zóny určen výhradně osobám starším 18 let.
           </p>
 
           {underageWarning ? (
-            <div className="mt-6 p-4 rounded-2xl bg-red-950/40 border border-red-600/60 text-red-200 text-xs text-left space-y-1">
-              <div className="flex items-center gap-2 font-bold text-red-400">
-                <AlertTriangle className="w-4 h-4 text-red-500" />
+            <div className="mt-5 p-3.5 rounded-xl bg-zinc-900 border border-red-500/40 text-red-300 text-xs text-left space-y-1">
+              <div className="flex items-center gap-1.5 font-bold text-red-400">
+                <AlertTriangle className="w-4 h-4 text-red-500" strokeWidth={1.5} />
                 <span>Přístup odepřen</span>
               </div>
-              <p>Tento obsah je určen pouze plnoletým. Děkujeme za pochopení a respektování legislativy.</p>
+              <p className="text-[11px] text-zinc-400">Tento obsah a prostor jsou určeny pouze plnoletým. Děkujeme za respektování legislativy ČR.</p>
             </div>
           ) : (
-            <div className="mt-8 space-y-3">
+            <div className="mt-6 space-y-2.5">
               <button
                 onClick={handleConfirmAge}
-                className="w-full py-3.5 px-6 rounded-2xl bg-red-600 hover:bg-red-500 text-white text-sm font-display font-extrabold uppercase tracking-wider shadow-[0_0_25px_rgba(255,20,36,0.6)] transition-all duration-200 active:scale-95"
+                className="w-full py-3 px-5 rounded-xl bg-red-600 hover:bg-red-700 text-white text-xs font-display font-bold uppercase tracking-wider transition-colors active:scale-95"
               >
                 Je mi 18 let a více – Vstoupit
               </button>
               
               <button
                 onClick={handleUnderage}
-                className="w-full py-2.5 px-6 rounded-2xl bg-zinc-900 hover:bg-zinc-800 text-zinc-400 hover:text-zinc-200 text-xs font-mono font-medium transition-colors border border-zinc-800"
+                className="w-full py-2 px-5 rounded-xl bg-zinc-900 hover:bg-zinc-850 text-zinc-400 hover:text-zinc-200 text-xs font-mono font-medium transition-colors border border-zinc-800"
               >
                 Ještě mi nebylo 18 let
               </button>
             </div>
           )}
 
-          <div className="mt-6 text-[11px] font-mono text-zinc-500 flex items-center justify-center gap-1.5">
-            <Gamepad2 className="w-3.5 h-3.5 text-red-500" />
+          <div className="mt-5 text-[11px] font-mono text-zinc-500 flex items-center justify-center gap-1.5">
+            <Gamepad2 className="w-3.5 h-3.5 text-zinc-400" strokeWidth={1.5} />
             <span>{STORE_INFO.address.street} (Masarykovo náměstí), Hradec Králové</span>
           </div>
         </motion.div>

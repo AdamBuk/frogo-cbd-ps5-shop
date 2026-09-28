@@ -1,3 +1,8 @@
+import cbdFlowersImg from '../assets/images/cbd-flowers.jpg';
+import vapesImg from '../assets/images/vapes.jpg';
+import jointsImg from '../assets/images/joints.jpg';
+import ps5LoungeImg from '../assets/images/ps5-lounge.jpg';
+
 export interface ProductItem {
   id: string;
   name: string;
@@ -23,13 +28,36 @@ export interface Category {
   featuredItems: ProductItem[];
 }
 
+// Local image references from assets/images
+export const LOCAL_IMAGES = {
+  flowers: cbdFlowersImg,
+  vapes: vapesImg,
+  joints: jointsImg,
+  ps5Lounge: ps5LoungeImg,
+};
+
+// Accurate Unsplash fallback URLs (curated high-res cannabis, authentic vapes, pre-rolls, PlayStation 5)
+export const UNSPLASH_FALLBACKS = {
+  flowers: 'https://images.unsplash.com/photo-1568644396922-5c3bfae12521?auto=format&fit=crop&w=1200&q=80',
+  flowersAlt1: 'https://images.unsplash.com/photo-1603909223429-69bb7101f420?auto=format&fit=crop&w=1200&q=80',
+  flowersAlt2: 'https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?auto=format&fit=crop&w=1200&q=80',
+  vapes: 'https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=1200&q=80',
+  vapesAlt1: 'https://images.unsplash.com/photo-1527799820374-dcf8d9d4a388?auto=format&fit=crop&w=1200&q=80',
+  vapesAlt2: 'https://images.unsplash.com/photo-1512069772995-ec65ed45afd6?auto=format&fit=crop&w=1200&q=80',
+  joints: 'https://images.unsplash.com/photo-1589556264800-08ae9e129a8c?auto=format&fit=crop&w=1200&q=80',
+  jointsAlt1: 'https://images.unsplash.com/photo-1568644396922-5c3bfae12521?auto=format&fit=crop&w=1200&q=80',
+  ps5: 'https://images.unsplash.com/photo-1606813907291-d86efa9b94db?auto=format&fit=crop&w=1200&q=80',
+  ps5Alt1: 'https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=1200&q=80',
+  ps5Alt2: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=1200&q=80',
+};
+
 export const CATEGORIES: Category[] = [
   {
     id: 'flowers',
     title: 'CBD Květy',
     subtitle: 'Prémiové indoor & greenhouse palice',
     description: 'Aromatické paličky pěstované v certifikovaných prostorech bez chemie. Dokonalý terpenový profil, vysoké CBD a nezaměnitelný vzhled i aroma.',
-    image: 'https://images.unsplash.com/photo-1568644396922-5c3bfae12521?auto=format&fit=crop&w=900&q=80',
+    image: cbdFlowersImg,
     accentBadge: '100% Organické',
     productsCount: '15+ odrůd na skladě',
     highlights: ['THC < 1% (100% v limitu ČR)', 'Bohatý terpenový profil', 'Ručně trimované indoor paličky'],
@@ -42,7 +70,7 @@ export const CATEGORIES: Category[] = [
         description: 'Vlajková loď obchodu. Intenzivní aroma, husté fialovo-zelené palice plné třpytivé pryskyřice a rychlý nástup relaxace bez těžké hlavy.',
         specs: 'CBD 19% | THC 0.7% | Terpeny: Limonen & Myrcen',
         price: 'od 199 Kč / g',
-        image: 'https://images.unsplash.com/photo-1568644396922-5c3bfae12521?auto=format&fit=crop&w=600&q=80',
+        image: cbdFlowersImg,
         badges: ['Bestseller', 'Indoor Ultra-Purity'],
         effects: ['Chill', 'Anti-stres', 'Čistá mysl']
       },
@@ -54,7 +82,7 @@ export const CATEGORIES: Category[] = [
         description: 'Tmavé, masivní květy s přirozeně vysokým podílem kanabinoidů. Dokonalá volba k večernímu gamingu nebo vypnutí po náročném dni.',
         specs: 'CBD 21% | THC 0.8% | Terpeny: Karyofylen',
         price: 'od 219 Kč / g',
-        image: 'https://images.unsplash.com/photo-1603909223429-69bb7101f420?auto=format&fit=crop&w=600&q=80',
+        image: UNSPLASH_FALLBACKS.flowersAlt1,
         badges: ['High CBD', 'Top Výběr'],
         effects: ['Hluboké uvolnění', 'Svalová regenerace']
       },
@@ -66,7 +94,7 @@ export const CATEGORIES: Category[] = [
         description: 'Svěží odrůda povzbuzující náladu a kreativitu. Ideální pro denní relax a posezení s přáteli.',
         specs: 'CBD 16% | THC 0.5% | Terpeny: Terpinolen',
         price: 'od 189 Kč / g',
-        image: 'https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?auto=format&fit=crop&w=600&q=80',
+        image: UNSPLASH_FALLBACKS.flowersAlt2,
         badges: ['Fresh Scent', 'Greenhouse'],
         effects: ['Pozitivní flow', 'Soustředění']
       }
@@ -77,7 +105,7 @@ export const CATEGORIES: Category[] = [
     title: 'Vapes',
     subtitle: 'Diskrétní vaporizéry & cartridge s terpeny',
     description: 'Moderní vaping bez zápachu a spalin. Pouze čistý destilát a živé botanické terpeny s okamžitým nástupem účinku bez kompromisů.',
-    image: 'https://images.unsplash.com/photo-1527799820374-dcf8d9d4a388?auto=format&fit=crop&w=900&q=80',
+    image: vapesImg,
     accentBadge: 'Okamžitý nástup',
     productsCount: 'Pera, cartridge i baterie',
     highlights: ['0% PG / 0% VG / 0% MCT oleje', 'Keramická CCELL technologie', 'Diskrétní design do kapsy'],
@@ -90,7 +118,7 @@ export const CATEGORIES: Category[] = [
         description: 'Kompaktní vaporizér pro cartridge se závitem 510 i magnetické pody. Haptická odezva při potahu a rychlé USB-C nabíjení.',
         specs: '380 mAh baterie | Hliníkové tělo | USB-C',
         price: '490 Kč',
-        image: 'https://images.unsplash.com/photo-1527799820374-dcf8d9d4a388?auto=format&fit=crop&w=600&q=80',
+        image: vapesImg,
         badges: ['Matný Černý Design', 'USB-C'],
         effects: ['Rychlý chill', 'Diskrétnost']
       },
@@ -102,7 +130,7 @@ export const CATEGORIES: Category[] = [
         description: 'Špičková keramická cartridge plná prémiového extraktu obohaceného o terpenový profil legendární odrůdy Granddaddy Purple.',
         specs: '1.0 ml (~350 potahů) | 750 mg kanabinoidů',
         price: '690 Kč',
-        image: 'https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=600&q=80',
+        image: UNSPLASH_FALLBACKS.vapesAlt1,
         badges: ['75% CBD', 'Živé terpeny'],
         effects: ['Okamžitá úleva', 'Večerní relax']
       },
@@ -114,7 +142,7 @@ export const CATEGORIES: Category[] = [
         description: 'Extrémně oblíbená cartridge s plnou chutí a bez dráždivých příměsí. Čistý konopný extrakt.',
         specs: '1.0 ml | 70% CBD | CCELL keramika',
         price: '690 Kč',
-        image: 'https://images.unsplash.com/photo-1512496015851-a90fb38ba796?auto=format&fit=crop&w=600&q=80',
+        image: UNSPLASH_FALLBACKS.vapes,
         badges: ['Limitovaná edice'],
         effects: ['Euforie', 'Zklidnění mysli']
       }
@@ -125,7 +153,7 @@ export const CATEGORIES: Category[] = [
     title: 'Joints',
     subtitle: 'Ručně balené pre-rolls z čistých palic',
     description: 'Žádný prach ani ořezy ze stonků. Naše pre-rolled joints obsahují výhradně prémiové drcené indoor CBD květy v nebělených bio konopných papírcích.',
-    image: 'https://images.unsplash.com/photo-1512496015851-a90fb38ba796?auto=format&fit=crop&w=900&q=80',
+    image: jointsImg,
     accentBadge: 'Ready to Smoke',
     productsCount: 'Single & Multi packy',
     highlights: ['100% čisté květy (žádný shake/trim)', 'Nebělené RAW konopné papírky', 'Vzduchotěsné skleněné tuby'],
@@ -138,7 +166,7 @@ export const CATEGORIES: Category[] = [
         description: 'Dokonale ubalený kužel v ochranné skleněné tubě, která chrání čerstvost a terpeny. Připraven k okamžitému zapálení.',
         specs: '1.2 g čistých květů | Keramický filtr | Skleněná tuba',
         price: '199 Kč',
-        image: 'https://images.unsplash.com/photo-1512496015851-a90fb38ba796?auto=format&fit=crop&w=600&q=80',
+        image: jointsImg,
         badges: ['Bestseller', 'Glass Tube'],
         effects: ['Silný relax', 'Okamžitý vibe']
       },
@@ -150,7 +178,7 @@ export const CATEGORIES: Category[] = [
         description: 'Těžší večerní blend s vysokým podílem myrcenu a CBD pro dokonalé uvolnění celého těla po tréninku nebo hraní.',
         specs: '1.0 g | Nebělený papír | Aktivní uhlíkový filtr',
         price: '179 Kč',
-        image: 'https://images.unsplash.com/photo-1568644396922-5c3bfae12521?auto=format&fit=crop&w=600&q=80',
+        image: UNSPLASH_FALLBACKS.joints,
         badges: ['Aktivní uhlí'],
         effects: ['Spánek', 'Svalová úleva']
       },
@@ -162,7 +190,7 @@ export const CATEGORIES: Category[] = [
         description: 'Kovová plechová krabička obsahující 3 různé profily: Amnesia, Kush a Berry. Skvělé řešení na víkendový chill.',
         specs: '3x 0.8 g | Stylová černá plechovka',
         price: '449 Kč',
-        image: 'https://images.unsplash.com/photo-1603909223429-69bb7101f420?auto=format&fit=crop&w=600&q=80',
+        image: jointsImg,
         badges: ['Výhodný set'],
         effects: ['Socializing', 'Dobrá nálada']
       }
@@ -173,7 +201,7 @@ export const CATEGORIES: Category[] = [
     title: 'PS5 Chill Zone',
     subtitle: 'Privátní gaming lounge & PlayStation 5 zážitek',
     description: 'Rezervuj si privátní chill-room v centru Hradce. Velká 4K OLED obrazovka, DualSense ovladače, prémiové ozvučení, luxusní gauč a naprosté soukromí pro tebe a tvou partu.',
-    image: 'https://images.unsplash.com/photo-1606813907291-d86efa9b94db?auto=format&fit=crop&w=900&q=80',
+    image: ps5LoungeImg,
     accentBadge: 'Private Room',
     productsCount: 'Konzole, hry & nápoje',
     highlights: ['PlayStation 5 + 4K 120Hz OLED TV', 'DualSense ovladače (až pro 4 hráče)', 'Top tituly: FC 25, Tekken 8, MK1, GTA, GT7'],
@@ -186,7 +214,7 @@ export const CATEGORIES: Category[] = [
         description: 'Privátní chill zóna na 60 minut pro 1–4 osoby. Plný přístup ke všem nainstalovaným hrám a soundbaru. Možnost dokoupit chlazené nápoje a CBD občerstvení.',
         specs: '60 minut | až 4 hráči | Privátní místnost',
         price: '250 Kč / hod',
-        image: 'https://images.unsplash.com/photo-1606813907291-d86efa9b94db?auto=format&fit=crop&w=600&q=80',
+        image: ps5LoungeImg,
         badges: ['Základní slot', 'Pro 1-4 hráče'],
         effects: ['Gaming', 'Rychlý chill']
       },
@@ -198,7 +226,7 @@ export const CATEGORIES: Category[] = [
         description: 'Dvě hodiny intenzivního gamingu a relaxu bez rušení. Ideální na turnaj ve fotbálku FC 25, bojovkách Tekken 8 nebo nočních jízdách v Gran Turismo 7.',
         specs: '120 minut | až 4 hráči | Welcome CBD nápoj v ceně',
         price: '450 Kč / 2 hod',
-        image: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=600&q=80',
+        image: UNSPLASH_FALLBACKS.ps5Alt1,
         badges: ['Bestseller slot', 'Nápoj v ceně'],
         effects: ['Turnaj', 'Maximální chill']
       },
@@ -210,7 +238,7 @@ export const CATEGORIES: Category[] = [
         description: 'Exkluzivní tříhodinový blok s prioritní rezervací. Maximální soukromí, ambientní červené podsvícení místnosti a 2x prémiové nápoje pro každého.',
         specs: '180 minut | Neomezené přepínání her | VIP komfort',
         price: '650 Kč / 3 hod',
-        image: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=600&q=80',
+        image: UNSPLASH_FALLBACKS.ps5Alt2,
         badges: ['VIP balíček', 'Večerní slot'],
         effects: ['Squad night', 'Legendární zážitek']
       }
@@ -242,7 +270,8 @@ export const STORE_INFO = {
     instagramUrl: 'https://instagram.com',
   },
   googleMapsUrl: 'https://www.google.com/maps/search/?api=1&query=Švehlova+633%2F10%2C+500+02+Hradec+Králové',
-  embedMapUrl: 'https://maps.google.com/maps?q=%C5%A0vehlova%20633%2F10,%20500%2002%20Hradec%20Kr%C3%A1lov%C3%A9&t=&z=16&ie=UTF8&iwloc=&output=embed'
+  embedMapUrl: 'https://maps.google.com/maps?q=%C5%A0vehlova%20633%2F10,%20500%2002%20Hradec%20Kr%C3%A1lov%C3%A9&t=&z=16&ie=UTF8&iwloc=&output=embed',
+  formspreeEndpoint: 'https://formspree.io/f/YOUR_ENDPOINT_HERE'
 };
 
 export const PS5_FEATURES = [
@@ -268,7 +297,7 @@ export const PS5_FEATURES = [
     icon: 'Armchair',
     title: 'Privátní lounge zóna',
     subtitle: 'Maximální soukromí & klubový vibe',
-    desc: 'Červené neonové ambientní osvětlení, pohodlný kožený gauč, chladící minibar a CBD chill.'
+    desc: 'Subtilní ambientní osvětlení, pohodlný kožený gauč, minibar a výběrové CBD občerstvení.'
   }
 ];
 
@@ -289,6 +318,10 @@ export const FAQS = [
   {
     question: 'Jak funguje rezervace PS5 Chill Roomu?',
     answer: 'Rezervaci zvládneš online přes náš rezervační formulář, na telefonu nebo rovnou osobně na prodejně ve Švehlově ulici. Vybereš si datum, čas a délku (1h, 2h nebo 3h slot). V místnosti je naprosté soukromí pro tebe a až 3 další kámoše.'
+  },
+  {
+    question: 'Jak probíhá platba za rezervaci PS5 Roomu?',
+    answer: 'Žádné platby online předem nepožadujeme. Platba probíhá až na místě (hotově nebo kartou) při příchodu do chill roomu.'
   },
   {
     question: 'Je vstup a nákup přísně 18+?',

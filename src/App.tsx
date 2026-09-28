@@ -21,7 +21,7 @@ export const App: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#050507] text-zinc-100 font-sans selection:bg-red-600 selection:text-white flex flex-col antialiased">
+    <div className="min-h-screen bg-zinc-950 text-zinc-100 font-sans selection:bg-red-600 selection:text-white flex flex-col antialiased">
       {/* 18+ Legal Verification Gate */}
       <AgeVerificationModal />
 
@@ -31,7 +31,7 @@ export const App: React.FC = () => {
         onClose={handleCloseBooking}
       />
 
-      {/* Main Street/Gaming Navbar */}
+      {/* Main Streetwear/Gaming Boutique Navbar */}
       <Navbar onOpenBooking={handleOpenBooking} />
 
       {/* Main Content Sections */}
@@ -39,7 +39,7 @@ export const App: React.FC = () => {
         {/* 1. Hero Section (Headline, Subtitle, CTAs: Produkty & Rezervovat PS5 Room) */}
         <Hero onOpenBooking={handleOpenBooking} />
 
-        {/* 2. O nás / PS5 Chill Zone (Not just a shop, but a place to chill, play PS5, and relax) */}
+        {/* 2. O nás / PS5 Chill Zone (Private Gaming & CBD Lounge) */}
         <AboutSection onOpenBooking={handleOpenBooking} />
 
         {/* 3. Kategorie (Menu: CBD Květy, Vapes, Joints, PS5 Chill Zone) */}
