@@ -1,13 +1,15 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { Gamepad2, Tv, Users, Armchair, Flame, Sparkles, Trophy } from 'lucide-react';
-import { PS5_FEATURES, GAMES_LIBRARY, STORE_INFO, LOCAL_IMAGES } from '../data/storeData';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Gamepad2, Tv, Users, Armchair, Flame, Sparkles, Trophy, Store } from 'lucide-react';
+import { PS5_FEATURES, GAMES_LIBRARY, STORE_INFO, REAL_IMAGES } from '../data/storeData';
 
 interface AboutSectionProps {
   onOpenBooking: () => void;
 }
 
 export const AboutSection: React.FC<AboutSectionProps> = ({ onOpenBooking }) => {
+  const [selectedPhoto, setSelectedPhoto] = useState<'lounge' | 'interior'>('lounge');
+
   return (
     <section id="o-nas" className="py-16 md:py-24 bg-zinc-900/40 relative overflow-hidden border-y border-zinc-800/80">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
@@ -52,7 +54,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onOpenBooking }) => 
         {/* Narrative & Visual Feature Grid */}
         <div id="ps5-features" className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center mb-16">
           
-          {/* Visual Showcase Side */}
+          {/* Visual Showcase Side featuring Real Photos */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -61,30 +63,84 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onOpenBooking }) => 
             className="lg:col-span-6 relative"
           >
             <div className="relative rounded-2xl overflow-hidden border border-zinc-800 bg-zinc-950 shadow-xl group">
-              <img
-                src={LOCAL_IMAGES.ps5Lounge}
-                alt="PS5 Chill-room gaming setup Frogo Hradec Králové"
-                className="w-full h-[400px] object-cover group-hover:scale-[1.02] transition-transform duration-500 ease-out"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/40 to-transparent pointer-events-none" />
+              
+              {/* Photo Display */}
+              <div className="relative h-[400px] w-full overflow-hidden bg-zinc-950">
+                <AnimatePresence mode="wait">
+                  {selectedPhoto === 'lounge' ? (
+                    <motion.img
+                      key="lounge-pic"
+                      src={REAL_IMAGES.ps5RoomAmbient}
+                      alt="Reálná PS5 chill zóna Frogo Hradec Králové"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.3 }}
+                      className="w-full h-full object-cover object-center"
+                    />
+                  ) : (
+                    <motion.img
+                      key="interior-pic"
+                      src={REAL_IMAGES.storeInterior}
+                      alt="Reálný interiér prodejny Frogo CBD Shop Hradec Králové"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.3 }}
+                      className="w-full h-full object-cover object-center"
+                    />
+                  )}
+                </AnimatePresence>
 
-              {/* Status Badge */}
-              <div className="absolute top-4 left-4 px-3 py-1.5 rounded-lg bg-zinc-950/90 backdrop-blur-sm border border-zinc-800 text-xs font-mono text-zinc-200 flex items-center gap-2">
-                <Trophy className="w-3.5 h-3.5 text-zinc-300" strokeWidth={1.5} />
-                <span className="font-medium">Next-Gen Gaming Lounge</span>
+                <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/40 to-transparent pointer-events-none" />
+              </div>
+
+              {/* Status Badge & Photo Switcher */}
+              <div className="absolute top-4 left-4 right-4 flex items-center justify-between">
+                <div className="flex items-center gap-1 p-1 rounded-lg bg-zinc-950/90 backdrop-blur-md border border-zinc-800">
+                  <button
+                    onClick={() => setSelectedPhoto('lounge')}
+                    className={`flex items-center gap-1 px-2 py-1 rounded text-[10px] font-mono transition-colors ${
+                      selectedPhoto === 'lounge'
+                        ? 'bg-zinc-800 text-white font-bold'
+                        : 'text-zinc-400 hover:text-white'
+                    }`}
+                  >
+                    <Gamepad2 className="w-3 h-3 text-red-500" strokeWidth={1.5} />
+                    <span>Lounge Setup</span>
+                  </button>
+                  <button
+                    onClick={() => setSelectedPhoto('interior')}
+                    className={`flex items-center gap-1 px-2 py-1 rounded text-[10px] font-mono transition-colors ${
+                      selectedPhoto === 'interior'
+                        ? 'bg-zinc-800 text-white font-bold'
+                        : 'text-zinc-400 hover:text-white'
+                    }`}
+                  >
+                    <Store className="w-3 h-3 text-red-500" strokeWidth={1.5} />
+                    <span>Interiér Shopu</span>
+                  </button>
+                </div>
+
+                <div className="px-2.5 py-1 rounded-lg bg-zinc-950/90 backdrop-blur-md border border-zinc-800 text-[10px] font-mono text-zinc-300 flex items-center gap-1.5">
+                  <Trophy className="w-3 h-3 text-red-500" strokeWidth={1.5} />
+                  <span>Reálné prostory</span>
+                </div>
               </div>
 
               {/* Overlay Content */}
               <div className="absolute bottom-5 left-5 right-5 text-white space-y-1.5">
                 <div className="flex items-center gap-1.5 text-xs font-mono uppercase tracking-wider text-red-400 font-bold">
                   <Sparkles className="w-3.5 h-3.5 text-red-500" strokeWidth={1.5} />
-                  <span>Kompletní soukromí & Boutique ambient</span>
+                  <span>Kompletní soukromí & Červený ambient</span>
                 </div>
                 <h3 className="font-display text-xl font-bold text-white uppercase tracking-tight">
-                  Kožený gauč, Soundbar & 4K OLED TV
+                  {selectedPhoto === 'lounge' ? 'PlayStation 5 • Ztlumená světla • TV Setup' : 'Prostorná prodejna & Zázemí lounge'}
                 </h3>
                 <p className="text-xs text-zinc-400 leading-relaxed">
-                  Přijď sólo relaxovat po náročném dni, nebo slož squad a uspořádejte FC 25 turnaj u vychlazených drinků a výběrového CBD.
+                  {selectedPhoto === 'lounge'
+                    ? 'Oddělená privátní místnost za závěsem pro tebe a tvou partu. 4K OLED, DualSense a absolutní klid.'
+                    : 'Příjemné čisté prostředí v centru města. Výdejní pult, skleněná vitrína s příslušenstvím a přátelský personál.'}
                 </p>
               </div>
             </div>
@@ -96,7 +152,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onOpenBooking }) => 
               </div>
               <div>
                 <div className="text-xs font-display font-bold text-white uppercase">Privátní sloty od 250 Kč</div>
-                <div className="text-[11px] font-mono text-zinc-400">Platba až na místě</div>
+                <div className="text-[11px] font-mono text-zinc-400">Platba probíhá až na místě</div>
               </div>
             </div>
           </motion.div>

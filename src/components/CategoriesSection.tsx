@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Sparkles, ArrowRight, X, Eye, ShieldAlert, Gamepad2, Flame, Wind, Layers } from 'lucide-react';
-import { CATEGORIES, type Category, STORE_INFO } from '../data/storeData';
+import { CATEGORIES, type Category, STORE_INFO, REAL_IMAGES } from '../data/storeData';
 
 interface CategoriesSectionProps {
   onOpenBooking: () => void;
@@ -167,22 +167,35 @@ export const CategoriesSection: React.FC<CategoriesSectionProps> = ({ onOpenBook
           })}
         </div>
 
-        {/* Quick Consultation Banner */}
-        <div className="mt-12 p-6 sm:p-7 rounded-2xl bg-zinc-900/80 border border-zinc-800 flex flex-col md:flex-row items-center justify-between gap-6">
-          <div className="space-y-1 text-center md:text-left">
-            <span className="text-xs font-mono uppercase tracking-widest text-zinc-400 font-medium flex items-center gap-1.5 justify-center md:justify-start">
-              <span className="w-2 h-2 rounded-full bg-emerald-500" />
-              Osobní nákup & Konzultace v centru HK
-            </span>
-            <h3 className="font-display text-xl font-bold text-white uppercase tracking-tight">
-              Chceš poradit s výběrem odrůdy nebo vaporizéru?
-            </h3>
-            <p className="text-xs text-zinc-400 max-w-xl">
-              Zastav se na prodejně Švehlova 633/10 (Masarykovo náměstí). Všechny květy si můžeš prohlédnout, přivonět a vybrat si ideální profil.
-            </p>
+        {/* Quick Consultation Banner with Real Store Showcase Photo */}
+        <div className="mt-12 rounded-2xl bg-zinc-900/80 border border-zinc-800 overflow-hidden flex flex-col md:flex-row items-center justify-between gap-6 p-6 sm:p-7">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-5">
+            <div className="relative w-24 h-24 sm:w-28 sm:h-28 rounded-xl overflow-hidden border border-zinc-800 flex-shrink-0 bg-zinc-950">
+              <img
+                src={REAL_IMAGES.storeCounter}
+                alt="Prodejní vitrína a příslušenství Frogo CBD Shop Hradec Králové"
+                className="w-full h-full object-cover object-center"
+              />
+              <span className="absolute bottom-1 left-1 right-1 px-1 py-0.5 rounded text-[8px] font-mono text-center bg-zinc-950/90 text-zinc-300 border border-zinc-800">
+                Vitrína shopu
+              </span>
+            </div>
+
+            <div className="space-y-1 text-left">
+              <span className="text-xs font-mono uppercase tracking-widest text-zinc-400 font-medium flex items-center gap-1.5">
+                <span className="w-2 h-2 rounded-full bg-emerald-500" />
+                Osobní nákup & Konzultace v centru HK
+              </span>
+              <h3 className="font-display text-xl font-bold text-white uppercase tracking-tight">
+                Chceš poradit s výběrem odrůdy nebo vaporizéru?
+              </h3>
+              <p className="text-xs text-zinc-400 max-w-xl">
+                Zastav se na prodejně Švehlova 633/10 (Masarykovo náměstí). Všechny květy si můžeš osobně prohlédnout, přivonět a vybrat si ideální terpenový profil.
+              </p>
+            </div>
           </div>
 
-          <div className="flex flex-col sm:flex-row items-center gap-2.5 w-full md:w-auto">
+          <div className="flex flex-col sm:flex-row items-center gap-2.5 w-full md:w-auto flex-shrink-0">
             <button
               onClick={onOpenBooking}
               className="w-full sm:w-auto text-center px-5 py-2.5 rounded-xl text-xs font-display font-bold uppercase tracking-wider bg-red-600 hover:bg-red-700 text-white transition-colors flex items-center justify-center gap-2"

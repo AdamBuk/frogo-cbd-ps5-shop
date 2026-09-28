@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { MapPin, Phone, Mail, Clock, Navigation, CheckCircle2, Send, Car, Bus, Gamepad2, ShieldAlert, AtSign, Loader2 } from 'lucide-react';
-import { STORE_INFO } from '../data/storeData';
+import { MapPin, Phone, Mail, Clock, Navigation, CheckCircle2, Send, Car, Bus, Gamepad2, ShieldAlert, AtSign, Loader2, Store } from 'lucide-react';
+import { STORE_INFO, REAL_IMAGES } from '../data/storeData';
 
 interface ContactSectionProps {
   onOpenBooking: () => void;
@@ -37,10 +37,8 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onOpenBooking })
           timestamp: new Date().toISOString()
         })
       });
-      // Handle both real endpoint and dev placeholder gracefully
       setFormSubmitted(true);
     } catch {
-      // Graceful fallback for offline / mock testing
       setFormSubmitted(true);
     } finally {
       setIsSubmitting(false);
@@ -144,9 +142,12 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onOpenBooking })
               </div>
             </div>
 
-            <div className="mt-5 pt-3.5 border-t border-zinc-850 flex items-center gap-2 text-xs font-mono text-zinc-400">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
-              <span>PS5 Chill Room je otevřen v celé provozní době</span>
+            <div className="mt-5 pt-3.5 border-t border-zinc-850 flex items-center justify-between text-[11px] font-mono text-zinc-500">
+              <span className="flex items-center gap-1.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                <span>PS5 Room otevřen</span>
+              </span>
+              <span>IČO: {STORE_INFO.business.ico}</span>
             </div>
           </div>
 
@@ -214,31 +215,53 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onOpenBooking })
 
         </div>
 
-        {/* Map & Inquiry Form Row */}
+        {/* Map, Real Storefront Photo & Inquiry Form Row */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
           
-          {/* Map & Directions */}
+          {/* Visual Storefront & Interactive Map */}
           <div className="lg:col-span-7 flex flex-col space-y-3.5">
-            <div className="relative rounded-2xl overflow-hidden border border-zinc-800 h-[380px] sm:h-[420px] bg-zinc-950">
-              <iframe
-                title="Frogo CBD Shop & PS5 chill-room Švehlova 633/10 Hradec Králové"
-                src={STORE_INFO.embedMapUrl}
-                width="100%"
-                height="100%"
-                style={{ border: 0 }}
-                allowFullScreen={false}
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                className="w-full h-full filter invert-[0.92] hue-rotate-[185deg] contrast-[1.2] saturate-[0.3]"
-              />
-
-              {/* Floating Dark Card over Map */}
-              <div className="absolute top-3.5 left-3.5 p-3 rounded-xl bg-zinc-950/95 backdrop-blur-sm border border-zinc-800 max-w-xs pointer-events-none">
-                <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 rounded-full bg-red-500" />
-                  <span className="text-xs font-display font-bold text-white uppercase">Frogo Shop & PS5</span>
+            <div className="grid grid-cols-1 sm:grid-cols-12 gap-3.5">
+              {/* Real Storefront Facade Photo */}
+              <div className="sm:col-span-5 h-56 sm:h-[380px] rounded-2xl overflow-hidden border border-zinc-800 bg-zinc-950 relative group">
+                <img
+                  src={REAL_IMAGES.storeExterior}
+                  alt="Kamenná prodejna Frogo CBD Shop Švehlova 633/10 Hradec Králové"
+                  className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/30 to-transparent pointer-events-none" />
+                <div className="absolute top-3 left-3">
+                  <span className="inline-flex items-center gap-1.5 px-2 py-1 rounded text-[10px] font-mono font-medium bg-zinc-950/90 backdrop-blur-sm text-zinc-300 border border-zinc-800">
+                    <Store className="w-3 h-3 text-red-500" strokeWidth={1.5} />
+                    <span>Fasáda prodejny</span>
+                  </span>
                 </div>
-                <p className="text-[11px] font-mono text-zinc-400 mt-0.5">Švehlova 633/10 (Masarykovo náměstí)</p>
+                <div className="absolute bottom-3 left-3 right-3 text-xs font-mono text-zinc-300">
+                  <div className="font-bold text-white">Švehlova 633/10</div>
+                  <div className="text-[10px] text-zinc-400">Přímo u Masarykova náměstí</div>
+                </div>
+              </div>
+
+              {/* Embedded Google Map */}
+              <div className="sm:col-span-7 relative rounded-2xl overflow-hidden border border-zinc-800 h-64 sm:h-[380px] bg-zinc-950">
+                <iframe
+                  title="Frogo CBD Shop & PS5 chill-room Švehlova 633/10 Hradec Králové"
+                  src={STORE_INFO.embedMapUrl}
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  allowFullScreen={false}
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  className="w-full h-full filter invert-[0.92] hue-rotate-[185deg] contrast-[1.2] saturate-[0.3]"
+                />
+
+                <div className="absolute top-3 left-3 p-2.5 rounded-xl bg-zinc-950/95 backdrop-blur-sm border border-zinc-800 max-w-xs pointer-events-none">
+                  <div className="flex items-center gap-1.5">
+                    <div className="w-2 h-2 rounded-full bg-red-500" />
+                    <span className="text-[11px] font-display font-bold text-white uppercase">Frogo CBD Shop</span>
+                  </div>
+                  <p className="text-[10px] font-mono text-zinc-400 mt-0.5">Centrum Hradce Králové</p>
+                </div>
               </div>
             </div>
 

@@ -137,7 +137,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenBooking }) => {
         {/* Bottom copyright & back to top */}
         <div className="pt-5 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-zinc-500">
           <div>
-            © {new Date().getFullYear()} Frogo CBD Shop & PS5 chill-room. Švehlova 633/10, Hradec Králové.
+            © {new Date().getFullYear()} Frogo CBD Shop & PS5 chill-room. Provozovatel: {STORE_INFO.business.operator} • IČO: {STORE_INFO.business.ico}. Švehlova 633/10, Hradec Králové.
           </div>
 
           <div className="flex items-center gap-3">

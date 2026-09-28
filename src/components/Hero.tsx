@@ -1,13 +1,15 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { ArrowDown, Gamepad2, Sparkles, MapPin, ShieldAlert, Flame, ChevronRight, Zap } from 'lucide-react';
-import { STORE_INFO, LOCAL_IMAGES } from '../data/storeData';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ArrowDown, Gamepad2, Sparkles, MapPin, ShieldAlert, Flame, ChevronRight, Zap, Store } from 'lucide-react';
+import { STORE_INFO, REAL_IMAGES } from '../data/storeData';
 
 interface HeroProps {
   onOpenBooking: () => void;
 }
 
 export const Hero: React.FC<HeroProps> = ({ onOpenBooking }) => {
+  const [activeTab, setActiveTab] = useState<'store' | 'ps5'>('store');
+
   return (
     <section className="relative overflow-hidden pt-8 pb-16 md:pt-14 md:pb-24 bg-zinc-950">
       {/* Background subtle boutique grid pattern */}
@@ -116,7 +118,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBooking }) => {
               </button>
             </div>
 
-            {/* Address micro-indicator */}
+            {/* Address indicator */}
             <div className="flex items-center gap-2 text-xs text-zinc-400 font-mono">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
               <span>Prodejna & Chill Lounge:</span>
@@ -124,7 +126,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBooking }) => {
             </div>
           </motion.div>
 
-          {/* Right Column: Sleek Streetwear Gaming Showcase */}
+          {/* Right Column: Real Storefront & Gaming Showcase with Interactive Switcher */}
           <motion.div
             initial={{ opacity: 0, scale: 0.98 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -133,54 +135,141 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBooking }) => {
           >
             <div className="relative mx-auto max-w-md lg:max-w-none">
               
-              {/* Main Image Container with sharp thin border */}
+              {/* Photo Frame Container */}
               <div className="relative overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-900 shadow-2xl">
-                <img
-                  src={LOCAL_IMAGES.ps5Lounge}
-                  alt="Frogo PS5 Chill-room gaming lounge Hradec Králové"
-                  className="w-full h-[440px] sm:h-[480px] object-cover object-center transform hover:scale-[1.02] transition-transform duration-500 ease-out"
-                />
+                
+                {/* Active Photo with Animation */}
+                <div className="relative h-[440px] sm:h-[480px] w-full bg-zinc-950 overflow-hidden">
+                  <AnimatePresence mode="wait">
+                    {activeTab === 'store' ? (
+                      <motion.img
+                        key="store-ext"
+                        src={REAL_IMAGES.storeExterior}
+                        alt="Frogo CBD Shop kamenná prodejna Švehlova Hradec Králové"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.3 }}
+                        className="w-full h-full object-cover object-center"
+                      />
+                    ) : (
+                      <motion.img
+                        key="ps5-rm"
+                        src={REAL_IMAGES.ps5Room}
+                        alt="Frogo PS5 Chill-room reálný gaming setup Hradec Králové"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.3 }}
+                        className="w-full h-full object-cover object-center"
+                      />
+                    )}
+                  </AnimatePresence>
 
-                {/* Dark Vignette Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/40 to-transparent pointer-events-none" />
+                  {/* Dark Vignette Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/30 to-transparent pointer-events-none" />
+                </div>
 
-                {/* Status Badge Top-Left */}
-                <div className="absolute top-4 left-4 px-3 py-1.5 rounded-lg bg-zinc-950/90 backdrop-blur-sm border border-zinc-800 text-[11px] font-mono flex items-center gap-2">
-                  <span className="w-2 h-2 rounded-full bg-emerald-500" />
-                  <span className="font-medium text-zinc-300 uppercase tracking-wider">STATUS: OTEVŘENO</span>
+                {/* Top Interactive Switcher & Status Badge */}
+                <div className="absolute top-3.5 left-3.5 right-3.5 flex items-center justify-between gap-2">
+                  <div className="flex items-center gap-1 p-1 rounded-lg bg-zinc-950/90 backdrop-blur-md border border-zinc-800">
+                    <button
+                      onClick={() => setActiveTab('store')}
+                      className={`flex items-center gap-1.5 px-2.5 py-1 rounded-md text-[11px] font-mono transition-colors ${
+                        activeTab === 'store'
+                          ? 'bg-zinc-800 text-white font-bold'
+                          : 'text-zinc-400 hover:text-white'
+                      }`}
+                    >
+                      <Store className="w-3 h-3 text-red-500" strokeWidth={1.5} />
+                      <span>Prodejna HK</span>
+                    </button>
+                    <button
+                      onClick={() => setActiveTab('ps5')}
+                      className={`flex items-center gap-1.5 px-2.5 py-1 rounded-md text-[11px] font-mono transition-colors ${
+                        activeTab === 'ps5'
+                          ? 'bg-zinc-800 text-white font-bold'
+                          : 'text-zinc-400 hover:text-white'
+                      }`}
+                    >
+                      <Gamepad2 className="w-3 h-3 text-red-500" strokeWidth={1.5} />
+                      <span>PS5 Lounge</span>
+                    </button>
+                  </div>
+
+                  <div className="px-2.5 py-1 rounded-lg bg-zinc-950/90 backdrop-blur-md border border-zinc-800 text-[10px] font-mono flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                    <span className="font-medium text-zinc-300 uppercase">REÁLNÉ FOTO</span>
+                  </div>
                 </div>
 
                 {/* Bottom Overlay Card */}
-                <div className="absolute bottom-4 left-4 right-4 p-4 rounded-xl bg-zinc-950/95 backdrop-blur-md border border-zinc-800 text-white">
-                  <div className="flex items-center justify-between mb-1.5">
-                    <div className="flex items-center gap-1.5">
-                      <Gamepad2 className="w-4 h-4 text-red-500" strokeWidth={1.5} />
-                      <span className="text-[11px] font-mono uppercase tracking-wider text-red-400 font-bold">
-                        Private Chill-Room
-                      </span>
-                    </div>
-                    <span className="px-2 py-0.5 rounded text-[10px] font-mono font-medium bg-zinc-900 border border-zinc-800 text-zinc-300">
-                      4K 120Hz OLED
-                    </span>
-                  </div>
-                  
-                  <h3 className="font-display text-base font-bold text-white tracking-tight">
-                    PlayStation 5 • 4x DualSense • VIP Lounge
-                  </h3>
-                  
-                  <p className="text-xs text-zinc-400 mt-1 leading-relaxed">
-                    FC 25, Tekken 8, GTA V a výběrové CBD občerstvení přímo na Masarykově náměstí.
-                  </p>
+                <div className="absolute bottom-3.5 left-3.5 right-3.5 p-4 rounded-xl bg-zinc-950/95 backdrop-blur-md border border-zinc-800 text-white">
+                  {activeTab === 'store' ? (
+                    <>
+                      <div className="flex items-center justify-between mb-1.5">
+                        <div className="flex items-center gap-1.5">
+                          <Store className="w-4 h-4 text-red-500" strokeWidth={1.5} />
+                          <span className="text-[11px] font-mono uppercase tracking-wider text-red-400 font-bold">
+                            Kamenná Prodejna
+                          </span>
+                        </div>
+                        <span className="px-2 py-0.5 rounded text-[10px] font-mono font-medium bg-zinc-900 border border-zinc-800 text-zinc-300">
+                          Centrum HK
+                        </span>
+                      </div>
+                      
+                      <h3 className="font-display text-base font-bold text-white tracking-tight">
+                        Švehlova 633/10 • Masarykovo náměstí
+                      </h3>
+                      
+                      <p className="text-xs text-zinc-400 mt-1 leading-relaxed">
+                        Prémiový sortiment CBD květů, vaporizérů, pre-rolls a zázemí privátního herního lounge.
+                      </p>
 
-                  <div className="mt-2.5 pt-2.5 border-t border-zinc-800/80 flex items-center justify-between">
-                    <span className="text-[11px] font-mono text-zinc-400">Hodinové i celovečerní sloty</span>
-                    <button
-                      onClick={onOpenBooking}
-                      className="text-xs font-display font-semibold uppercase text-red-400 hover:text-red-300 transition-colors"
-                    >
-                      Rezervovat slot &rarr;
-                    </button>
-                  </div>
+                      <div className="mt-2.5 pt-2.5 border-t border-zinc-800/80 flex items-center justify-between">
+                        <span className="text-[11px] font-mono text-zinc-400">Po–Čt do 21h • Pá–So do 23h</span>
+                        <a
+                          href="#kontakt"
+                          className="text-xs font-display font-semibold uppercase text-red-400 hover:text-red-300 transition-colors"
+                        >
+                          Zobrazit mapu &rarr;
+                        </a>
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <div className="flex items-center justify-between mb-1.5">
+                        <div className="flex items-center gap-1.5">
+                          <Gamepad2 className="w-4 h-4 text-red-500" strokeWidth={1.5} />
+                          <span className="text-[11px] font-mono uppercase tracking-wider text-red-400 font-bold">
+                            Private Chill-Room
+                          </span>
+                        </div>
+                        <span className="px-2 py-0.5 rounded text-[10px] font-mono font-medium bg-zinc-900 border border-zinc-800 text-zinc-300">
+                          Reálný Setup
+                        </span>
+                      </div>
+                      
+                      <h3 className="font-display text-base font-bold text-white tracking-tight">
+                        PlayStation 5 • Ambientní Lounge • Soundbar
+                      </h3>
+                      
+                      <p className="text-xs text-zinc-400 mt-1 leading-relaxed">
+                        FC 25, Tekken 8, GTA V a občerstvení přímo v soukromé místnosti v centru Hradce.
+                      </p>
+
+                      <div className="mt-2.5 pt-2.5 border-t border-zinc-800/80 flex items-center justify-between">
+                        <span className="text-[11px] font-mono text-zinc-400">Platba až na místě (od 250 Kč)</span>
+                        <button
+                          onClick={onOpenBooking}
+                          className="text-xs font-display font-semibold uppercase text-red-400 hover:text-red-300 transition-colors"
+                        >
+                          Rezervovat slot &rarr;
+                        </button>
+                      </div>
+                    </>
+                  )}
                 </div>
 
               </div>

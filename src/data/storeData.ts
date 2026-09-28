@@ -1,7 +1,6 @@
 import cbdFlowersImg from '../assets/images/cbd-flowers.jpg';
 import vapesImg from '../assets/images/vapes.jpg';
 import jointsImg from '../assets/images/joints.jpg';
-import ps5LoungeImg from '../assets/images/ps5-lounge.jpg';
 
 export interface ProductItem {
   id: string;
@@ -28,12 +27,22 @@ export interface Category {
   featuredItems: ProductItem[];
 }
 
-// Local image references from assets/images
+// Authentic real photos from the actual store & gaming lounge
+export const REAL_IMAGES = {
+  storeExterior: '/images/store-exterior.webp',
+  ps5Room: '/images/ps5-room.webp',
+  ps5RoomAmbient: '/images/ps5-room-ambient.webp',
+  storeInterior: '/images/store-interior.webp',
+  storeCounter: '/images/store-counter.webp',
+  storeHoursSign: '/images/store-hours-sign.webp',
+};
+
+// Curated high-resolution boutique placeholders
 export const LOCAL_IMAGES = {
   flowers: cbdFlowersImg,
   vapes: vapesImg,
   joints: jointsImg,
-  ps5Lounge: ps5LoungeImg,
+  ps5Lounge: REAL_IMAGES.ps5Room,
 };
 
 // Accurate Unsplash fallback URLs (curated high-res cannabis, authentic vapes, pre-rolls, PlayStation 5)
@@ -201,7 +210,7 @@ export const CATEGORIES: Category[] = [
     title: 'PS5 Chill Zone',
     subtitle: 'Privátní gaming lounge & PlayStation 5 zážitek',
     description: 'Rezervuj si privátní chill-room v centru Hradce. Velká 4K OLED obrazovka, DualSense ovladače, prémiové ozvučení, luxusní gauč a naprosté soukromí pro tebe a tvou partu.',
-    image: ps5LoungeImg,
+    image: REAL_IMAGES.ps5Room,
     accentBadge: 'Private Room',
     productsCount: 'Konzole, hry & nápoje',
     highlights: ['PlayStation 5 + 4K 120Hz OLED TV', 'DualSense ovladače (až pro 4 hráče)', 'Top tituly: FC 25, Tekken 8, MK1, GTA, GT7'],
@@ -214,8 +223,8 @@ export const CATEGORIES: Category[] = [
         description: 'Privátní chill zóna na 60 minut pro 1–4 osoby. Plný přístup ke všem nainstalovaným hrám a soundbaru. Možnost dokoupit chlazené nápoje a CBD občerstvení.',
         specs: '60 minut | až 4 hráči | Privátní místnost',
         price: '250 Kč / hod',
-        image: ps5LoungeImg,
-        badges: ['Základní slot', 'Pro 1-4 hráče'],
+        image: REAL_IMAGES.ps5Room,
+        badges: ['Reálný setup', 'Pro 1-4 hráče'],
         effects: ['Gaming', 'Rychlý chill']
       },
       {
@@ -226,8 +235,8 @@ export const CATEGORIES: Category[] = [
         description: 'Dvě hodiny intenzivního gamingu a relaxu bez rušení. Ideální na turnaj ve fotbálku FC 25, bojovkách Tekken 8 nebo nočních jízdách v Gran Turismo 7.',
         specs: '120 minut | až 4 hráči | Welcome CBD nápoj v ceně',
         price: '450 Kč / 2 hod',
-        image: UNSPLASH_FALLBACKS.ps5Alt1,
-        badges: ['Bestseller slot', 'Nápoj v ceně'],
+        image: REAL_IMAGES.ps5RoomAmbient,
+        badges: ['Ambient Lounge', 'Nápoj v ceně'],
         effects: ['Turnaj', 'Maximální chill']
       },
       {
@@ -238,7 +247,7 @@ export const CATEGORIES: Category[] = [
         description: 'Exkluzivní tříhodinový blok s prioritní rezervací. Maximální soukromí, ambientní červené podsvícení místnosti a 2x prémiové nápoje pro každého.',
         specs: '180 minut | Neomezené přepínání her | VIP komfort',
         price: '650 Kč / 3 hod',
-        image: UNSPLASH_FALLBACKS.ps5Alt2,
+        image: REAL_IMAGES.ps5Room,
         badges: ['VIP balíček', 'Večerní slot'],
         effects: ['Squad night', 'Legendární zážitek']
       }
@@ -257,6 +266,11 @@ export const STORE_INFO = {
     region: 'Královéhradecký kraj, Česká republika',
     note: 'Přímo u Masarykova náměstí, rychlý přístup z pěší zóny'
   },
+  business: {
+    operator: 'Vít Pulchart',
+    ico: '24911453',
+    registeredAddress: 'Školská 660/3, Nové Město, 110 00 Praha 1',
+  },
   openingHours: [
     { days: 'Pondělí – Čtvrtek', hours: '11:00 – 21:00', status: 'Otevřeno' },
     { days: 'Pátek – Sobota', hours: '11:00 – 23:00', status: 'Late-Night Gaming' },
@@ -271,13 +285,14 @@ export const STORE_INFO = {
   },
   googleMapsUrl: 'https://www.google.com/maps/search/?api=1&query=Švehlova+633%2F10%2C+500+02+Hradec+Králové',
   embedMapUrl: 'https://maps.google.com/maps?q=%C5%A0vehlova%20633%2F10,%20500%2002%20Hradec%20Kr%C3%A1lov%C3%A9&t=&z=16&ie=UTF8&iwloc=&output=embed',
-  formspreeEndpoint: 'https://formspree.io/f/YOUR_ENDPOINT_HERE'
+  formspreeEndpoint: 'https://formspree.io/f/YOUR_ENDPOINT_HERE',
+  images: REAL_IMAGES
 };
 
 export const PS5_FEATURES = [
   {
     icon: 'Gamepad2',
-    title: 'Sony PlayStation 5 Pro Setup',
+    title: 'Sony PlayStation 5 Setup',
     subtitle: 'Nativní 4K & Ultra-fluid 120 FPS',
     desc: 'Užij si nejnovější generaci konzolí v plné parádě bez jakýchkoliv kompromisů.'
   },
@@ -297,7 +312,7 @@ export const PS5_FEATURES = [
     icon: 'Armchair',
     title: 'Privátní lounge zóna',
     subtitle: 'Maximální soukromí & klubový vibe',
-    desc: 'Subtilní ambientní osvětlení, pohodlný kožený gauč, minibar a výběrové CBD občerstvení.'
+    desc: 'Ambientní osvětlení, pohodlný kožený gauč, minibar a výběrové CBD občerstvení.'
   }
 ];
 

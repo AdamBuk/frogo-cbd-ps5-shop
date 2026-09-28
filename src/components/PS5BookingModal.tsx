@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Gamepad2, Calendar, Clock, Users, CheckCircle2, Tv, CreditCard, Banknote, Phone, ShieldAlert, Loader2 } from 'lucide-react';
-import { GAMES_LIBRARY, STORE_INFO } from '../data/storeData';
+import { GAMES_LIBRARY, STORE_INFO, REAL_IMAGES } from '../data/storeData';
 
 interface PS5BookingModalProps {
   isOpen: boolean;
@@ -110,18 +110,26 @@ export const PS5BookingModal: React.FC<PS5BookingModalProps> = ({ isOpen, onClos
           {step === 'form' ? (
             <form onSubmit={handleBooking} className="p-5 sm:p-6 space-y-5 max-h-[78vh] overflow-y-auto">
               
-              {/* PROMINENT TEXT: NO ONLINE PAYMENTS REQUIRED BANNER */}
-              <div className="p-3.5 rounded-xl bg-zinc-900/90 border border-red-500/30 flex items-start gap-3">
-                <div className="w-8 h-8 rounded-lg bg-zinc-850 border border-zinc-700/80 flex items-center justify-center text-red-400 flex-shrink-0 mt-0.5">
-                  <CreditCard className="w-4 h-4" strokeWidth={1.5} />
+              {/* Real Room Preview & PROMINENT TEXT: NO ONLINE PAYMENTS REQUIRED BANNER */}
+              <div className="p-3.5 rounded-xl bg-zinc-900/90 border border-zinc-800 flex flex-col sm:flex-row items-start sm:items-center gap-4">
+                <div className="relative w-full sm:w-28 h-20 rounded-lg overflow-hidden border border-zinc-800 flex-shrink-0 bg-zinc-950">
+                  <img
+                    src={REAL_IMAGES.ps5Room}
+                    alt="Reálný PS5 Room Frogo Hradec Králové"
+                    className="w-full h-full object-cover object-center"
+                  />
+                  <span className="absolute bottom-1 left-1 px-1.5 py-0.5 rounded text-[8px] font-mono bg-zinc-950/90 text-zinc-300 border border-zinc-800">
+                    Reálný setup
+                  </span>
                 </div>
-                <div>
+
+                <div className="flex-1">
                   <div className="text-xs font-mono font-bold text-red-400 uppercase tracking-wide flex items-center gap-1.5">
                     <Banknote className="w-3.5 h-3.5 text-zinc-300" strokeWidth={1.5} />
                     <span>Platba probíhá až na místě (hotově nebo kartou).</span>
                   </div>
-                  <p className="text-[11px] text-zinc-400 mt-0.5 leading-relaxed">
-                    Žádné platby online předem. Rezervace je nezávazná, platíte až při příchodu na prodejnu ve Švehlově ulici.
+                  <p className="text-[11px] text-zinc-400 mt-1 leading-relaxed">
+                    Žádné platby online předem. Rezervace je nezávazná, platíte až při příchodu do herny na adrese Švehlova 633/10.
                   </p>
                 </div>
               </div>
